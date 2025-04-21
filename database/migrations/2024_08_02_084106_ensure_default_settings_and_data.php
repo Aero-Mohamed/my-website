@@ -17,26 +17,26 @@ return new class extends Migration
                 'title' => '{"en": "Home", "fr": "Home"}',
                 'slug' => '{"en": "home", "fr": "home"}',
                 'content' => file_get_contents(base_path('data/home.json')),
-                'created_at' => now()->timestamp,
-                'updated_at' => now()->timestamp,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'title' => '{"en": "Blog", "fr": "Blog"}',
                 'slug' => '{"en": "blog", "fr": "blog"}',
                 'content' => file_get_contents(base_path('data/blog.json')),
-                'created_at' => now()->timestamp,
-                'updated_at' => now()->timestamp,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
         DB::table('posts')->insert([
             [
                 'title' => '{"en": "Hello World!", "fr": "Bonjour Monde!"}',
                 'slug' => '{"en": "hello-world", "fr": "bonjour-monde"}',
-                'published_at' => now()->startOfDay()->startOfYear()->timestamp,
+                'published_at' => now()->startOfDay()->startOfYear(),
                 'short_description' => '{"en": "This is an example article", "fr": "Ceci est un exemple d\'article"}',
                 'content' => file_get_contents(base_path('data/helloworld.json')),
-                'created_at' => now()->timestamp,
-                'updated_at' => now()->timestamp,
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }

@@ -19,7 +19,7 @@
                                     {{ post.title }}
                                 </enhanced-link>
                             </h3>
-                            <p class="mt-3 line-clamp-3 text-sm leading-6 text-gray-600">{{ post.short_description }}</p>
+                            <p class="mt-3 line-clamp-3 text-sm leading-6 text-gray-600" v-mathjax >{{ post.short_description }}</p>
                         </div>
                         <div class="relative mt-8 flex items-center gap-x-4" v-if="false">
                             <img :src="asset(post.author.imageUrl)" alt="" class="h-10 w-10 rounded-full bg-gray-100" />

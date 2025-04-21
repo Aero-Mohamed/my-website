@@ -1,5 +1,6 @@
 import './bootstrap';
 import '../css/app.css';
+import mathjax from './utils/mathjax';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -7,7 +8,6 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
-console.log(import.meta.env.VITE_CDN_URL);
 import asset from '@/Helpers/Asset';
 
 createInertiaApp({
@@ -16,7 +16,8 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         const app = createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(ZiggyVue);
+            .use(ZiggyVue)
+            .directive('mathjax', mathjax);
         app.config.globalProperties.asset = (path, recipe) => {
             return asset(path, recipe);
         }

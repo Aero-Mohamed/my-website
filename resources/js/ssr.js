@@ -7,6 +7,7 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 import asset from '@/Helpers/Asset';
+import mathjax from "@/utils/mathjax.js";
 
 createServer((page) =>
     createInertiaApp({
@@ -20,7 +21,8 @@ createServer((page) =>
                 .use(ZiggyVue, {
                     ...page.props.ziggy,
                     location: new URL(page.props.ziggy.location),
-                });
+                })
+                .directive('mathjax', mathjax);
             app.config.globalProperties.asset = (path, recipe) => {
                 return asset(path, recipe);
             }

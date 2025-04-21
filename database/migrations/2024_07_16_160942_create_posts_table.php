@@ -17,8 +17,8 @@ return new class extends Migration
             $table->json('slug');
             $table->json('content');
             $table->json('short_description');
+            $table->string('featured_image')->nullable();
             $table->timestamp('published_at')->nullable();
-            $table->string('featured_image')->nullable()->after('short_description');
             $table->json('seo')->nullable();
             $table->json('meta')->nullable();
             $table->timestamps();

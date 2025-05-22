@@ -19,16 +19,16 @@
         --border: hsl(214.3 31.8% 91.4%);
         --input: hsl(214.3 31.8% 91.4%);
 
-        --primary: hsl(248, 67%, 12%);
+        --primary: #121519;
         --primary-foreground: hsl(0, 0%, 100%);
 
         --secondary: hsl(293, 80%, 10%);
         --secondary-foreground: hsl(0, 0%, 100%);
 
-        --accent: hsl(354, 68%, 50%);
+        --accent: #f83768;
         --accent-foreground: hsl(222.2 47.4% 11.2%);
 
-        --destructive: hsl(0 84.2% 60.2%);
+        --destructive: #f83768;
         --destructive-foreground: hsl(210 40% 98%);
 
         --ring: hsl(222.2 84% 4.9%);

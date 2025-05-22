@@ -3,7 +3,7 @@
         <div class="notification text-center py-3 bg-red-600 px-4 text-sm font-medium text-primary-foreground sm:px-6 lg:px-8" v-if="$page.props.globals.nav.banner" v-html="$page.props.globals.nav.banner"></div>
         <Disclosure as="nav" :class="bg" v-slot="{ open }">
             <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                <div class="relative flex h-16 items-center justify-between">
+                <div class="relative flex h-24 items-center justify-between">
                     <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                         <!-- Mobile menu button-->
                         <DisclosureButton class="relative inline-flex items-center justify-center rounded-md p-2 text-primary-foreground hover:bg-gray-100 hover:text-black focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -13,18 +13,18 @@
                             <XMarkIcon v-else class="block h-6 w-6" aria-hidden="true" />
                         </DisclosureButton>
                     </div>
-                    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-center">
                         <div class="flex flex-shrink-0 items-center">
                             <enhanced-link :href="`/${$page.props.locale}`">
-                                <img class="h-8 relative w-auto" src="/logo.svg" :alt="$page.props.globals.general.copyright" style="top: 1px;" />
+                                <img class="h-8 relative w-auto" src="/logo.png" :alt="$page.props.globals.general.copyright" style="top: 1px; height: 5rem ;" />
                             </enhanced-link>
                         </div>
-                        <div class="hidden sm:ml-6 sm:block">
+                        <div class="hidden sm:ml-6 sm:block self-center h-10">
                             <div class="flex space-x-4">
                                 <enhanced-link v-for="item in $page.props.globals.nav.navlinks" :key="item.name" :href="item.link" :class="[isActive(item) ? 'bg-gray-100 text-black' : 'text-primary-foreground hover:bg-white/15', 'rounded-md px-3 py-2 font-medium']" :aria-current="isActive(item) ? 'page' : undefined">{{ item.name }}</enhanced-link>
                             </div>
                         </div>
-                        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                        <div class="hidden lg:flex lg:flex-1 lg:justify-end self-center h-10">
                             <Menu as="div" class="relative ml-3">
                                 <div>
                                     <MenuButton class="mr-3 inline-block rounded-md px-3.5 py-2.5 text-sm font-semibold text-primary-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-${variant}-600">

@@ -28,6 +28,9 @@ createServer((page) =>
             }
             return app;
         },
+        progress: {
+            color: '#f83768',
+        },
     }),
     13715
 );

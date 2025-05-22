@@ -7,9 +7,9 @@ use Spatie\Translatable\HasTranslations;
 class Setting extends BaseModel
 {
     use HasTranslations;
-    protected $translatable = ['value'];
+    protected array $translatable = ['value'];
 
-    static function globals()
+    static function globals(): array
     {
         // Because this gets invoked in the web.php file, the very first time we run the application this will crash
         try {
@@ -41,18 +41,19 @@ class Setting extends BaseModel
     {
         return [
             'general' => [
-                'copyright' => 'Sabatino Masala'
+                'copyright' => 'Mohamed Hassan'
             ],
             'seo' => [
-                'title' => 'Filament marketing starter',
+                'title' => 'Mohamed Hassan',
+                'description' => 'Mohamed Hassan',
             ],
             'routes' => [
                 'blog' => '/blog',
             ],
             'nav' => [
-                'nav_cta_text' => 'Fork me on Github',
-                'nav_cta_link' => 'https://github.com/sabatinomasala/filament-marketing-starter',
-                'banner' => 'Welcome to the starter kit!',
+                'nav_cta_text' => '', //Fork me on Github
+                'nav_cta_link' => '', //link
+                'banner' => '', // Welcome to the starter kit!
                 'navlinks' => [
                     'type' => 'navlink',
                     'data' => [
@@ -70,14 +71,10 @@ class Setting extends BaseModel
                         [
                             'title' => 'Socials',
                             'links' => [
-                                [
-                                    'name' => 'Youtube Channel',
-                                    'link' => 'https://www.youtube.com/channel/UCU1VNvcwKDmsHqbTtUOaZ-w'
-                                ],
-                                [
-                                    'name' => 'Github',
-                                    'link' => 'https://github.com/sabatinoMasala'
-                                ]
+//                                [
+//                                    'name' => 'Youtube Channel',
+//                                    'link' => 'https://www.youtube.com/channel/UCU1VNvcwKDmsHqbTtUOaZ-w'
+//                                ],
                             ]
                         ]
                     ]

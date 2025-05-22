@@ -56,6 +56,7 @@ class PageController extends Controller
             }
             return $content;
         })->toArray();
+
         return Inertia::render('Page', [
             'page' => $pageData,
         ]);

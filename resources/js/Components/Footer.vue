@@ -3,7 +3,7 @@
         <h2 id="footer-heading" class="sr-only">Footer</h2>
         <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-12">
             <div class="xl:grid xl:grid-cols-4 xl:gap-8">
-                <img class="h-7" src="/logo.svg" :alt="$page.props.globals.general.copyright" />
+                <img class="h-34" src="/logo.png" :alt="$page.props.globals.general.copyright" />
                 <div class="mt-16 grid grid-cols-1 gap-8 xl:col-span-3 xl:mt-0">
                     <div class="md:grid md:grid-cols-4 md:gap-8">
                         <div v-for="linkGroup in linkGroups">

@@ -19,7 +19,7 @@ Route::group([
     Route::group([
         'prefix' => c('routes.blog'),
     ], function() {
-        Route::get('/{slug}', [BlogController::class, 'show']);
+        Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.show');
     });
     Route::get('/{any?}', [PageController::class, 'show'])->where('any', '.*');
 });

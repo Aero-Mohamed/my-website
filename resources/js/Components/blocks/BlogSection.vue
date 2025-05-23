@@ -1,20 +1,20 @@
 <template>
-    <div class="bg-white">
+    <div class="bg-white pt-4">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                 <article v-for="post in props.data.items" :key="post.id" class="flex flex-col items-start justify-between">
-                    <div class="relative w-full">
+                    <div class="relative w-full mt-4">
                         <img :src="asset(post.featured_image, 'BLOG_CARD')" :alt="post.title" class="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]" v-if="post.featured_image" />
                         <div class="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
                     </div>
                     <div class="max-w-xl">
-                        <div class="mt-8 flex items-center gap-x-4 text-xs">
+                        <div class="mt-2 flex items-center gap-x-4 text-xs">
                             <time :datetime="post.datetime" class="text-gray-500">{{ post.datetime_readable }}</time>
                             <a v-if="false" :href="post.category.href" class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100">{{ post.category.title }}</a>
                         </div>
                         <div class="group relative">
                             <h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                                <enhanced-link :href="`${data.meta.base_path}/${post.slug}`">
+                                <enhanced-link :href="route('blog.show', post.slug)">
                                     <span class="absolute inset-0" />
                                     {{ post.title }}
                                 </enhanced-link>

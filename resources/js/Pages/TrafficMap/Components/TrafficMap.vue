@@ -3,12 +3,13 @@ import {onMounted, ref, watch, onBeforeUnmount} from 'vue'
 import maplibregl from 'maplibre-gl'
 import {MapboxOverlay as DeckOverlay} from '@deck.gl/mapbox';
 import {ArcLayer, ScatterplotLayer} from '@deck.gl/layers';
+import TrafficStatsPanel from "@/Pages/TrafficMap/Components/TrafficStatsPanel.vue";
+import TrafficStatsStore from "@/Pages/TrafficMap/Components/TrafficStatsStore.js";
 
 // Set up refs
 const mapContainer = ref(null)
 let map = null
 let deckOverlay = null
-let trafficSimulationInterval = null
 let trafficBuffer = ref([]);
 
 // Active traffic data that will be displayed
@@ -16,6 +17,12 @@ const activeTrafficData = ref([])
 
 // Store unique server locations (will be displayed as blue points)
 const serverLocations = ref([])
+
+const colors = [
+    [120, 176, 250],
+    [163, 240, 173],
+    [246, 250, 120]
+];
 
 // Function to add a server location to the serverLocations array
 // Only adds if the server_ip doesn't already exist in the array
@@ -29,21 +36,49 @@ const addServerLocation = (serverIp, location) => {
             id: `server-${serverIp}`
         })
     }
+
+    TrafficStatsStore.servers = serverLocations.value.length
 }
 
 // Function to simulate traffic coming in
 const simulateTraffic = (trafficDataBatch) => {
     // Add a new random traffic data point
     if(Array.isArray(trafficDataBatch) && trafficDataBatch.length){
+
         trafficDataBatch.forEach((item) => {
-            activeTrafficData.value.push({
-                ...item,
-                id: Date.now(),
-            })
+
+            TrafficStatsStore.requests += 1;
+
+            const existingIndex = activeTrafficData.value.findIndex(
+                (data) => Array.isArray(data.client) &&
+                    data.client[0] === item.client?.[0] &&
+                    data.client[1] === item.client?.[1] &&
+                    data.server_ip === item.server_ip
+            )
+
+            if (existingIndex !== -1) {
+                let colorIdx = activeTrafficData.value[existingIndex].colorIdx;
+
+                if (colorIdx + 1 > colors.length - 1) {
+                    activeTrafficData.value[existingIndex].colorIdx = 0;
+                } else {
+                    activeTrafficData.value[existingIndex].colorIdx += 1;
+                }
+
+            }else{
+                activeTrafficData.value.push({
+                    ...item,
+                    colorIdx: 0,
+                    shouldChangeColor: true,
+                    id: Date.now(),
+                })
+            }
 
             // Add server location to our server locations array
             addServerLocation(item.server_ip, item.server)
         })
+
+        TrafficStatsStore.connections = activeTrafficData.value.length;
 
         // Update the deck overlay with new data
         if (deckOverlay) {
@@ -52,10 +87,18 @@ const simulateTraffic = (trafficDataBatch) => {
     }
 }
 
-// Function to update the deck overlay with new data
+//Function to update the deck overlay with new data
 const updateDeckOverlay = () => {
     if (!deckOverlay) return;
 
+    // map.removeControl(deckOverlay)
+    //
+    // // Initialize deck.gl overlay with empty data
+    // deckOverlay = new DeckOverlay({
+    //     interleaved: true,
+    //     layers: []
+    // });
+    //
     deckOverlay.setProps({
         layers: [
             // Animated arcs for traffic
@@ -70,14 +113,16 @@ const updateDeckOverlay = () => {
                 // },
                 getSourcePosition: d => d.client,
                 getTargetPosition: d => d.server,
-                getSourceColor: d => [251, 151, 84],
+                getSourceColor: d => colors[d.colorIdx],
+                // getSourceColor: d => [251, 151, 84],
                 getTargetColor: d => [248, 55, 104],
                 getWidth: d => {
-                    return 1;
+                    return 1.5;
                 },
                 // animationSpeed: 0.015,
                 // trailLength: 0.3,
                 // fadeOut: true,
+                onComplete: () => {console.log('COmplate')}
                 // onComplete: () => {
                 //     // Since we can't access the specific data item here,
                 //     // we'll remove the oldest item from the activeTrafficData array
@@ -91,7 +136,6 @@ const updateDeckOverlay = () => {
                 id: `server-locations${Date.now()}`,
                 data: serverLocations.value,
                 getPosition: d => d.location,
-                getColor: [248, 55, 104], // Servers Color
                 getRadius: 8,
                 radiusMinPixels: 6,
                 pickable: true,
@@ -103,6 +147,9 @@ const updateDeckOverlay = () => {
             })
         ]
     });
+
+
+    // map.addControl(deckOverlay);
 
 };
 
@@ -166,7 +213,9 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+
     <div class="traffic-map-container">
+        <TrafficStatsPanel/>
         <div ref="mapContainer" class="map-container"></div>
 
     </div>

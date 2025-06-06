@@ -2,7 +2,6 @@
 import {onMounted, ref, watch, onBeforeUnmount} from 'vue'
 import maplibregl from 'maplibre-gl'
 import {MapboxOverlay as DeckOverlay} from '@deck.gl/mapbox';
-import {AnimatedArcLayer} from "@/Pages/TrafficMap/Components/AnimatedArcLayer.js";
 import {ArcLayer, ScatterplotLayer} from '@deck.gl/layers';
 
 // Set up refs
@@ -128,6 +127,12 @@ onMounted(() => {
     map.on('load', () => {
         map.addControl(deckOverlay);
         map.addControl(new maplibregl.NavigationControl());
+
+        const ele = document.getElementsByClassName('maplibregl-control-container')
+        while (ele.length > 0) {
+            ele[0].parentNode.removeChild(ele[0]);
+        }
+
     });
 
     Echo.channel(`application-traffic`)
@@ -178,4 +183,5 @@ onBeforeUnmount(() => {
     height: 100%;
     width: 100%;
 }
+
 </style>

@@ -3,6 +3,11 @@
 - Pink Light: #f83768
 - Orange: #fb9754
 
+# Deploy
+- `npm ci`
+- `NODE_OPTIONS="--max-old-space-size=4096" npm run build`
+- `sudo supervisorctl restart {service name}`
+
 # Getting started
 
 Clone the repository and run the following commands:

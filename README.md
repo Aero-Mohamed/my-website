@@ -4,9 +4,35 @@
 - Orange: #fb9754
 
 # Deploy
+- `install --no-dev --no-interaction --prefer-dist --optimize-autoloader`
+- `php artisan optimize`
+- `php artisan cache:clear`
 - `npm ci`
 - `NODE_OPTIONS="--max-old-space-size=4096" npm run build`
+- Get the SSR Service Name: `sudo supervisorctl status`
 - `sudo supervisorctl restart {service name}`
+
+# SSR Service 
+File Location `/etc/supervisor/conf.d/daemon-375200.conf`
+```
+[program:daemon-375200]
+directory=/home/forge/mohamed-hassan.is-a.dev/
+command=php8.3 artisan inertia:start-ssr
+process_name=%(program_name)s_%(process_num)02d
+autostart=true
+autorestart=true
+user=forge
+numprocs=1
+startsecs=1
+redirect_stderr=true
+stdout_logfile=/home/forge/.forge/daemon-375200.log
+stdout_logfile_maxbytes=5MB
+stdout_logfile_backups=3
+stopwaitsecs=5
+stopsignal=SIGTERM
+stopasgroup=true
+killasgroup=true
+```
 
 # Getting started
 

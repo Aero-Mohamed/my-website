@@ -8,6 +8,16 @@
 
         <link data-n-head="ssr" rel="icon" type="image/x-icon" href="/favicon.ico">
 
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-WFM1K3J74K"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-WFM1K3J74K');
+        </script>
+
         <!-- Scripts -->
         @routes
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>

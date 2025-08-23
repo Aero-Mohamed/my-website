@@ -21,5 +21,7 @@ Route::group([
     ], function() {
         Route::get('/{slug}', [BlogController::class, 'show'])->name('blog.show');
     });
+
+    Route::get('/project-traffic-map', \App\Http\Controllers\TrafficMapController::class)->name('traffic-map');
     Route::get('/{any?}', [PageController::class, 'show'])->where('any', '.*');
 });

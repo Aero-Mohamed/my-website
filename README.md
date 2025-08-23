@@ -16,6 +16,19 @@ php artisan migrate
 php artisan filament:user
 ```
 
+# SSL Certificate
+## check for valid ssl certificate
+```bash
+echo | openssl s_client -servername mohamed-hassan.is-a.dev -connect mohamed-hassan.is-a.dev:443 2>/dev/null | openssl x509 -noout -text
+```
+
+## Renew the certificate
+```bash
+sudo certbot certonly --nginx -d mohamed-hassan.is-a.dev
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
 Visit /admin and log in with the user you just created.
 Now you can manage pages & articles in the Filament admin panel.
 
